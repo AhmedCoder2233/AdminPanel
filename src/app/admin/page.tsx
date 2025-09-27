@@ -143,6 +143,7 @@ export default function AdminPanel() {
           item_name: order.item_name,
           item_description: order.item_description,
           item_quantity: order.quantity,
+          table_no: order.table_no
         }),
       });
 
@@ -776,4 +777,5 @@ export default function AdminPanel() {
     </div>
   );
 }
+
 
