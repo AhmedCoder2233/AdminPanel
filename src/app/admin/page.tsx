@@ -79,7 +79,7 @@ export default function AdminPanel() {
 
   const fetchFeedbacks = async () => {
     try {
-      const res = await fetch("http://localhost:8000/users/feedback");
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/feedback");
       const data = await res.json();
       setFeedbacks(data);
     } catch (err) {
@@ -91,7 +91,7 @@ export default function AdminPanel() {
   const fetchOrders = async (showLoader = false) => {
     if (showLoader) setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/users/ownerorders");
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/ownerorders");
       const data = await res.json();
       setOrders(data);
     } catch (err) {
@@ -104,7 +104,7 @@ export default function AdminPanel() {
   // Fetch All Orders for Analytics
   const fetchAllOrders = async () => {
     try {
-      const res = await fetch("http://localhost:8000/users/adminorders");
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/adminorders");
       const data = await res.json();
       setAllOrders(data);
     } catch (err) {
@@ -116,7 +116,7 @@ export default function AdminPanel() {
   const fetchMenus = async (showLoader = false) => {
     if (showLoader) setMenuLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/users/menu");
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/menu");
       const data = await res.json();
       setMenus(data);
     } catch (err) {
@@ -129,12 +129,12 @@ export default function AdminPanel() {
   // Approve Order
   const approveOrder = async (order: Order) => {
     try {
-      await fetch(`http://localhost:8000/users/admin/order/${order.orderid}/accept`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/admin/order/${order.orderid}/accept`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
       });
 
-      await fetch("http://localhost:8000/users/kitchenorder", {
+      await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/kitchenorder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -146,7 +146,7 @@ export default function AdminPanel() {
         }),
       });
 
-      await fetch(`http://localhost:8000/users/deleteownerorder/${order.orderid}`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/deleteownerorder/${order.orderid}`, {
         method: "DELETE",
       });
 
@@ -159,12 +159,12 @@ export default function AdminPanel() {
   // Reject Order
   const rejectOrder = async (orderid: string) => {
     try {
-      await fetch(`http://localhost:8000/users/admin/order/${orderid}/reject`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/admin/order/${orderid}/reject`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
       });
 
-      await fetch(`http://localhost:8000/users/deleteownerorder/${orderid}`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/deleteownerorder/${orderid}`, {
         method: "DELETE",
       });
 
@@ -178,7 +178,7 @@ export default function AdminPanel() {
   const deleteMenu = async (name: string) => {
     try {
       if (!confirm(`Are you sure you want to delete menu "${name}"?`)) return;
-      const res = await fetch(`http://localhost:8000/users/deletemenu/${encodeURIComponent(name)}`, {
+      const res = await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/deletemenu/${encodeURIComponent(name)}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete menu");
@@ -205,7 +205,7 @@ export default function AdminPanel() {
         image: newMenu.image,
         rating: Number(newMenu.rating) || 5,
       };
-      const res = await fetch("http://localhost:8000/users/addmenu", {
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/addmenu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -227,7 +227,7 @@ export default function AdminPanel() {
   const fetchStaff = async () => {
     setStaffLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/users/staff");
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/staff");
       const data = await res.json();
       setStaff(data);
     } catch (err) {
@@ -244,7 +244,7 @@ export default function AdminPanel() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:8000/users/staff", {
+      const res = await fetch("https://jessika-patrological-crankly.ngrok-free.dev/users/staff", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newStaffName }),
@@ -261,7 +261,7 @@ export default function AdminPanel() {
   // Change Status → Online
   const markPresent = async (name: string) => {
     try {
-      await fetch(`http://localhost:8000/users/staffstatusonline/${name}`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/staffstatusonline/${name}`, {
         method: "PUT",
       });
       fetchStaff();
@@ -273,7 +273,7 @@ export default function AdminPanel() {
   // Change Status → Offline
   const markAbsent = async (name: string) => {
     try {
-      await fetch(`http://localhost:8000/users/staffstatusoffline/${name}`, {
+      await fetch(`https://jessika-patrological-crankly.ngrok-free.dev/users/staffstatusoffline/${name}`, {
         method: "PUT",
       });
       fetchStaff();
@@ -776,3 +776,4 @@ export default function AdminPanel() {
     </div>
   );
 }
+
