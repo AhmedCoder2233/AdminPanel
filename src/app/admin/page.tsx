@@ -308,8 +308,9 @@ export default function AdminPanel() {
   // 🔹 Analytics Data (Group by Date)
   const analyticsData = Object.values(
     allOrders.reduce((acc: any, order) => {
-      const day = new Date(order.created_at).toLocaleDateString();
-      if (!acc[day]) {
+const day = new Date(order.created_at).toLocaleDateString("en-US", {
+  timeZone: "Asia/Karachi",
+});      if (!acc[day]) {
         acc[day] = { day, total_sales: 0, orders_count: 0 };
       }
       acc[day].total_sales += Number(order.total) || 0;
@@ -448,7 +449,7 @@ export default function AdminPanel() {
                         Price: {order.price} × {order.quantity} ={" "}
                         <span className="font-bold text-orange-600">{order.total}</span>
                       </p>
-                      <p className="text-gray-600 text-xs">Ordered At: {new Date(order.created_at).toLocaleString()}</p>
+                      <p className="text-gray-600 text-xs">Ordered At:   {new Date(order.created_at).toLocaleString("en-US", { timeZone: "Asia/Karachi" })}</p>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-4">
@@ -522,7 +523,8 @@ export default function AdminPanel() {
                           <td className="px-4 py-2 text-gray-900">{order.quantity}</td>
                           <td className="px-4 py-2 font-semibold text-orange-600">{order.total}</td>
                           <td className="px-4 py-2 text-gray-900">{order.status}</td>
-                          <td className="px-4 py-2 text-sm text-gray-900">{new Date(order.created_at).toLocaleString()}</td>
+                          <td className="px-4 py-2 text-sm text-gray-900">  {new Date(order.created_at).toLocaleString("en-US", { timeZone: "Asia/Karachi" })}
+</td>
                         </tr>
                       ))}
                     </tbody>
@@ -777,6 +779,7 @@ export default function AdminPanel() {
     </div>
   );
 }
+
 
 
 
