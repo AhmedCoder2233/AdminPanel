@@ -308,9 +308,8 @@ export default function AdminPanel() {
   // 🔹 Analytics Data (Group by Date)
   const analyticsData = Object.values(
     allOrders.reduce((acc: any, order) => {
-const day = new Date(order.created_at).toLocaleDateString("en-US", {
-  timeZone: "Asia/Karachi",
-});      if (!acc[day]) {
+const day = new Date(order.created_at).toLocaleDateString();      
+      if (!acc[day]) {
         acc[day] = { day, total_sales: 0, orders_count: 0 };
       }
       acc[day].total_sales += Number(order.total) || 0;
@@ -779,6 +778,7 @@ const day = new Date(order.created_at).toLocaleDateString("en-US", {
     </div>
   );
 }
+
 
 
 
